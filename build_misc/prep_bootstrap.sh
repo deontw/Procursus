@@ -19,12 +19,14 @@ SYS_LANG=$(sudo -u mobile deviceinfo locale)
 MESSAGE="In order to use command line tools like \"sudo\" after jailbreaking, you will need to set a terminal passcode. (This cannot be empty)"
 TYPE_PASSWORD="Password"
 RETYPE_PASSWORD="Repeat Password"
+SET="Set"
 SET_PASSWORD="Set Password"
 
 ZH_HANT(){
     MESSAGE="為了在越獄之後使用終端機命令例如 sudo ，您需要設定一個終端機密碼。（不能為空）"
     TYPE_PASSWORD="請輸入密碼"
     RETYPE_PASSWORD="請再次輸入密碼"
+    SET="設定"
     SET_PASSWORD="設定密碼"
 }
 
@@ -32,6 +34,7 @@ ZH_HANS(){
     MESSAGE="为了在越狱之后使用终端命令例如 sudo ，您需要设置一个终端密码。（不能为空）"
     TYPE_PASSWORD="请输入密码"
     RETYPE_PASSWORD="请再次输入密码"
+    SET="设置"
     SET_PASSWORD="设置密码"
 }
 
@@ -45,7 +48,7 @@ if [ -z "$NO_PASSWORD_PROMPT" ]; then
     PASSWORD1=""
     PASSWORD2=""
     while [ -z "$PASSWORD1" ] || [ ! "$PASSWORD1" = "$PASSWORD2" ]; do
-            PASSWORDS="$(@MEMO_PREFIX@@MEMO_SUB_PREFIX@/bin/uialert -b "$MESSAGE" --secure "$TYPE_PASSWORD" --secure "$RETYPE_PASSWORD" -p "Set" "$SET_PASSWORD")"
+            PASSWORDS="$(@MEMO_PREFIX@@MEMO_SUB_PREFIX@/bin/uialert -b "$MESSAGE" --secure "$TYPE_PASSWORD" --secure "$RETYPE_PASSWORD" -p "$SET" "$SET_PASSWORD")"
             PASSWORD1="$(printf "%s\n" "$PASSWORDS" | @MEMO_PREFIX@@MEMO_SUB_PREFIX@/bin/sed -n '1 p')"
             PASSWORD2="$(printf "%s\n" "$PASSWORDS" | @MEMO_PREFIX@@MEMO_SUB_PREFIX@/bin/sed -n '2 p')"
     done
